@@ -6,3 +6,189 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role ENUM('user', 'admin') NOT NULL DEFAULT 'user'
 );
+
+
+----------- terror activity tabs
+
+CREATE TABLE events (
+    eventid INT PRIMARY KEY,
+    iyear INT,
+    imonth INT,
+    iday INT,
+    approxdate VARCHAR(50),
+    extended BOOLEAN,
+    resolution VARCHAR(100),
+    summary TEXT,
+    crit1 BOOLEAN,
+    crit2 BOOLEAN,
+    crit3 BOOLEAN,
+    doubtterr BOOLEAN,
+    alternative INT,
+    alternative_txt VARCHAR(100),
+    multiple BOOLEAN,
+    related TEXT
+);
+
+CREATE TABLE location (
+    loc_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    country INT,
+    country_txt VARCHAR(100),
+    region INT,
+    region_txt VARCHAR(100),
+    provstate VARCHAR(100),
+    city VARCHAR(100),
+    latitude FLOAT,
+    longitude FLOAT,
+    specificity INT,
+    vicinity BOOLEAN,
+    location VARCHAR(255),
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE attack (
+    attack_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    attacktype1 INT,
+    attacktype1_txt VARCHAR(100),
+    attacktype2 INT,
+    attacktype2_txt VARCHAR(100),
+    attacktype3 INT,
+    attacktype3_txt VARCHAR(100),
+    success BOOLEAN,
+    suicide BOOLEAN,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE target (
+    target_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    targtype1 INT,
+    targtype1_txt VARCHAR(100),
+    targsubtype1 INT,
+    targsubtype1_txt VARCHAR(100),
+    corp1 VARCHAR(255),
+    target1 VARCHAR(255),
+    natlty1 INT,
+    natlty1_txt VARCHAR(100),
+    targtype2 INT,
+    targtype2_txt VARCHAR(100),
+    targsubtype2 INT,
+    targsubtype2_txt VARCHAR(100),
+    corp2 VARCHAR(255),
+    target2 VARCHAR(255),
+    natlty2 INT,
+    natlty2_txt VARCHAR(100),
+    targtype3 INT,
+    targtype3_txt VARCHAR(100),
+    targsubtype3 INT,
+    targsubtype3_txt VARCHAR(100),
+    corp3 VARCHAR(255),
+    target3 VARCHAR(255),
+    natlty3 INT,
+    natlty3_txt VARCHAR(100),
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE perpetrator (
+    perp_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    gname VARCHAR(255),
+    gsubname VARCHAR(255),
+    gname2 VARCHAR(255),
+    gsubname2 VARCHAR(255),
+    gname3 VARCHAR(255),
+    gsubname3 VARCHAR(255),
+    motive TEXT,
+    guncertain1 BOOLEAN,
+    guncertain2 BOOLEAN,
+    guncertain3 BOOLEAN,
+    individual BOOLEAN,
+    nperps INT,
+    nperpcap INT,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE claim (
+    claim_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    claimed BOOLEAN,
+    claimmode INT,
+    claimmode_txt VARCHAR(100),
+    claim2 BOOLEAN,
+    claimmode2 INT,
+    claimmode2_txt VARCHAR(100),
+    claim3 BOOLEAN,
+    claimmode3 INT,
+    claimmode3_txt VARCHAR(100),
+    compclaim BOOLEAN,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE weapon (
+    weapon_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    weaptype1 INT,
+    weaptype1_txt VARCHAR(100),
+    weapsubtype1 INT,
+    weapsubtype1_txt VARCHAR(100),
+    weaptype2 INT,
+    weaptype2_txt VARCHAR(100),
+    weapsubtype2 INT,
+    weapsubtype2_txt VARCHAR(100),
+    weaptype3 INT,
+    weaptype3_txt VARCHAR(100),
+    weapsubtype3 INT,
+    weapsubtype3_txt VARCHAR(100),
+    weaptype4 INT,
+    weaptype4_txt VARCHAR(100),
+    weapsubtype4 INT,
+    weapsubtype4_txt VARCHAR(100),
+    weapdetail TEXT,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE casualties (
+    cas_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    nkill INT,
+    nkillus INT,
+    nkillter INT,
+    nwound INT,
+    nwoundus INT,
+    nwoundte INT,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE property_damage (
+    prop_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    property BOOLEAN,
+    propextent INT,
+    propextent_txt VARCHAR(100),
+    propvalue FLOAT,
+    propcomment TEXT,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
+
+CREATE TABLE hostage_kidnapping (
+    hostkid_id INT AUTO_INCREMENT PRIMARY KEY,
+    eventid INT,
+    ishostkid BOOLEAN,
+    nhostkid INT,
+    nhostkidus INT,
+    nhours INT,
+    ndays INT,
+    divert VARCHAR(255),
+    kidhijcountry VARCHAR(100),
+    ransom BOOLEAN,
+    ransomamt FLOAT,
+    ransomamtus FLOAT,
+    ransompaid FLOAT,
+    ransompaidus FLOAT,
+    ransomnote TEXT,
+    hostkidoutcome INT,
+    hostkidoutcome_txt VARCHAR(100),
+    nreleased INT,
+    FOREIGN KEY (eventid) REFERENCES events(eventid)
+);
