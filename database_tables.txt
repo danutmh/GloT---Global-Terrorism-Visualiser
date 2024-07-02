@@ -11,7 +11,7 @@ CREATE TABLE users (
 ----------- terror activity tabs
 
 CREATE TABLE events (
-    eventid INT PRIMARY KEY,
+    eventid BIGINT PRIMARY KEY,
     iyear INT,
     imonth INT,
     iday INT,
@@ -31,7 +31,7 @@ CREATE TABLE events (
 
 CREATE TABLE location (
     loc_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     country INT,
     country_txt VARCHAR(100),
     region INT,
@@ -48,7 +48,7 @@ CREATE TABLE location (
 
 CREATE TABLE attack (
     attack_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     attacktype1 INT,
     attacktype1_txt VARCHAR(100),
     attacktype2 INT,
@@ -62,7 +62,7 @@ CREATE TABLE attack (
 
 CREATE TABLE target (
     target_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     targtype1 INT,
     targtype1_txt VARCHAR(100),
     targsubtype1 INT,
@@ -92,7 +92,7 @@ CREATE TABLE target (
 
 CREATE TABLE perpetrator (
     perp_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     gname VARCHAR(255),
     gsubname VARCHAR(255),
     gname2 VARCHAR(255),
@@ -111,7 +111,7 @@ CREATE TABLE perpetrator (
 
 CREATE TABLE claim (
     claim_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     claimed BOOLEAN,
     claimmode INT,
     claimmode_txt VARCHAR(100),
@@ -127,7 +127,7 @@ CREATE TABLE claim (
 
 CREATE TABLE weapon (
     weapon_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     weaptype1 INT,
     weaptype1_txt VARCHAR(100),
     weapsubtype1 INT,
@@ -150,7 +150,7 @@ CREATE TABLE weapon (
 
 CREATE TABLE casualties (
     cas_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     nkill INT,
     nkillus INT,
     nkillter INT,
@@ -162,7 +162,7 @@ CREATE TABLE casualties (
 
 CREATE TABLE property_damage (
     prop_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     property BOOLEAN,
     propextent INT,
     propextent_txt VARCHAR(100),
@@ -173,7 +173,7 @@ CREATE TABLE property_damage (
 
 CREATE TABLE hostage_kidnapping (
     hostkid_id INT AUTO_INCREMENT PRIMARY KEY,
-    eventid INT,
+    eventid BIGINT,
     ishostkid BOOLEAN,
     nhostkid INT,
     nhostkidus INT,
